@@ -1,5 +1,5 @@
 <template>
-  <div class="play__screen">
+  <div class="screen">
     <div
       class="play__screen--cards"
       :style="{
@@ -16,14 +16,14 @@
         :card="{ index, value: item }"
         :cardsContext="cardsContext"
         :rules="rules"
-        @flip-card="checkResult($event)"
+        @onFlipCard="checkResult($event)"
       />
     </div>
   </div>
 </template>
 
 <script>
-import Card from './Card.vue'
+import Card from '../Card.vue'
 
 export default {
   components: {

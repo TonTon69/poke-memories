@@ -10,7 +10,14 @@
     @click="onFlipCard"
   >
     <div class="card__face card__face--front">
-      <img src="@/assets/images/icon_back.png" alt="" width="40" />
+      <div
+        class="card__content"
+        :style="{
+          'background-size': `${
+            (((754 - 16 * 4) / Math.sqrt(cardsContext.length) - 16) * 3) / 4 / 3
+          }px ${(((754 - 16 * 4) / Math.sqrt(cardsContext.length) - 16) * 3) / 4 / 3}px`
+        }"
+      ></div>
     </div>
     <div class="card__face card__face--back">{{ card.value }}</div>
   </div>
@@ -38,11 +45,12 @@ export default {
       isDisabled: false
     }
   },
+  emits: ['onFlipCard'],
   methods: {
     onFlipCard() {
       if (this.rules.length >= 2 || this.isFlipped || this.isDisabled) return
       this.isFlipped = true
-      this.$emit('flip-card', this.card)
+      this.$emit('onFlipCard', this.card)
     },
 
     onFlipBackCard() {
@@ -66,7 +74,6 @@ export default {
   cursor: pointer;
   background-color: var(--light);
   color: var(--dark);
-
   position: relative;
   transition: transform 1s;
   transform-style: preserve-3d;
@@ -76,14 +83,20 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-
   position: absolute;
   height: 100%;
   width: 100%;
   backface-visibility: hidden;
 }
 
+.card__face--front .card__content {
+  background: url('../assets/images/icon_back.png') no-repeat center center;
+  height: 100%;
+  width: 100%;
+}
+
 .card__face--back {
+  font-size: 20px;
   transform: rotateY(180deg);
 }
 

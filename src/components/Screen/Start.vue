@@ -1,8 +1,7 @@
 <template>
-	<div class="start__screen">
+	<div class="screen">
 		<div>
-			<h1>Welcome to Poke Memories Game</h1>
-			<h3>Select mode to play game</h3>
+			<h1>Select mode to start game</h1>
 
 			<!-- Mode  -->
 			<div class="start__screen--cards">
@@ -17,35 +16,24 @@
 
 <script>
 export default {
+	emits: ["onSelectMode"],
 	methods: {
 		onSelectMode(mode) {
-			this.$emit('select-mode', mode);
+			this.$emit('onSelectMode', mode);
 		}
 	}
 }
 </script>
 
 <style scoped>
-.start__screen h1 {
-	font-size: 48px;
-}
-
-.start__screen {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-	height: 100%;
-}
-
-.start__screen .start__screen--cards {
+.start__screen--cards {
 	display: flex;
 	align-items: center;
 	gap: 16px;
 	margin-top: 32px;
 }
 
-.start__screen .start__screen--cards .card {
+.card {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -56,5 +44,10 @@ export default {
 	border: 1px solid var(--light);
 	cursor: pointer;
 	font-size: 20px;
+}
+
+.card:hover {
+	background-color: var(--light);
+	color: var(--dark);
 }
 </style>
