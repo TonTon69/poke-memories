@@ -3,7 +3,6 @@
     <div>
       <h1>Select mode to start game</h1>
 
-      <!-- Mode  -->
       <div class="start__screen--cards">
         <div class="card" @click="onSelectMode(16)">4x4</div>
         <div class="card" @click="onSelectMode(36)">6x6</div>
