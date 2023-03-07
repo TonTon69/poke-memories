@@ -7,7 +7,12 @@
       <p>Enter user name to play game</p>
       <br />
       <div class="input__container">
-        <Input :name="username" label="User name" @onChange="onChange" />
+        <Input
+          :name="username"
+          label="User name"
+          @onChange="onChange"
+          @onEnterChange="onEnterChange"
+        />
       </div>
       <br />
       <br />
@@ -34,17 +39,25 @@ export default {
     }
   },
   methods: {
-    onNextSelectMode() {
-      if (!this.username) {
+    handleNext(username) {
+      if (!username) {
         alert('Please enter a username')
         return
       }
 
-      this.$emit('onNextSelectMode', { username: this.username })
+      this.$emit('onNextSelectMode', { username })
+    },
+
+    onNextSelectMode() {
+      this.handleNext(this.username)
     },
 
     onChange(data) {
       this.username = data.text
+    },
+
+    onEnterChange(data) {
+      this.handleNext(data.text)
     }
   }
 }

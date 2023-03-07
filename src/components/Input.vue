@@ -1,6 +1,13 @@
 <template>
   <div class="input__group">
-    <input v-model="text" type="text" :name="name" :id="name" :placeholder="label" />
+    <input
+      v-model="text"
+      type="text"
+      :name="name"
+      :id="name"
+      :placeholder="label"
+      @keyup.enter="onEnter"
+    />
     <label :for="name">{{ label }}</label>
     <div class="req-mark">!</div>
   </div>
@@ -17,10 +24,15 @@ export default {
       text: this.name
     }
   },
-  emits: ['onChange'],
+  emits: ['onChange', 'onEnterChange'],
   watch: {
     text(text) {
       this.$emit('onChange', { text })
+    }
+  },
+  methods: {
+    onEnter() {
+      this.$emit('onEnterChange', { text: this.text })
     }
   }
 }

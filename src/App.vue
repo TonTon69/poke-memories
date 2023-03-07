@@ -1,12 +1,12 @@
 <template>
   <Login v-if="screenStep === 1" @onNextSelectMode="onNextSelectMode" />
-  <Start v-if="screenStep === 2" @onSelectMode="onSelectMode" />
+  <SelectMode v-if="screenStep === 2" @onSelectMode="onSelectMode" />
   <Play v-if="screenStep === 3" :cardsContext="cardsContext" @onFinish="onFinishGame" />
   <Result v-if="screenStep === 4" @onStartAgain="onStartAgain" />
 </template>
 
 <script>
-import Start from './components/Screen/Start.vue'
+import SelectMode from './components/Screen/SelectMode.vue'
 import Play from './components/Screen/Play.vue'
 import Result from './components/Screen/Result.vue'
 import Login from './components/Screen/Login.vue'
@@ -17,7 +17,7 @@ import { POKE_USERNAME } from './utils/constants'
 export default {
   components: {
     Login,
-    Start,
+    SelectMode,
     Play,
     Result
   },
