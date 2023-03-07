@@ -1,11 +1,11 @@
 <template>
   <div class="screen">
     <div class="result__inner">
-      <h1>✨ Congratulations ✨</h1>
+      <h1>✨ Congratulations, {{ username }} ✨</h1>
       <br />
       <h3>{{ Math.round(timer / 920) }} seconds</h3>
       <br />
-      <Button @onClick="onStartAgain" title="Start again" :style="`--clr:#FF44CC`"/>
+      <Button @onClick="onStartAgain" title="Start again" :style="`--clr:#FF44CC`" />
     </div>
   </div>
 </template>
@@ -17,13 +17,14 @@ export default {
   props: {
     timer: {
       type: Number,
-      default () {
+      default() {
         return 0
       }
-    }
+    },
+    username: String
   },
   components: { Button },
-  emits: ["onStartAgain"],
+  emits: ['onStartAgain'],
   methods: {
     onStartAgain() {
       this.$emit('onStartAgain')

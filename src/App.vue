@@ -1,9 +1,14 @@
 <template>
   <Account :username="username" v-if="username" @onLogout="onLogout" />
   <Login v-if="screenStep === 1" @onNextSelectMode="onNextSelectMode" />
-  <SelectMode v-if="screenStep === 2" @onSelectMode="onSelectMode" />
-  <Play v-if="screenStep === 3" :cardsContext="cardsContext" @onFinish="onFinishGame" />
-  <Result v-if="screenStep === 4" @onStartAgain="onStartAgain" />
+  <SelectMode v-if="screenStep === 2 && username" @onSelectMode="onSelectMode" />
+  <Play v-if="screenStep === 3 && username" :cardsContext="cardsContext" @onFinish="onFinishGame" />
+  <Result
+    :username="username"
+    v-if="screenStep === 4 && username"
+    @onStartAgain="onStartAgain"
+    :timer="timer"
+  />
 </template>
 
 <script>
@@ -66,7 +71,7 @@ export default {
     },
 
     onStartAgain() {
-      this.screenStep = 1
+      this.screenStep = 2
     },
 
     onLogout() {

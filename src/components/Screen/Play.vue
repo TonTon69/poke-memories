@@ -13,7 +13,7 @@
         v-for="(item, index) in cardsContext"
         ref="card"
         :key="index"
-        :card="{ index, value: item }"
+        :card="{ index, value: item, img: `images/${item}.png` }"
         :cardsContext="cardsContext"
         :rules="rules"
         @onFlipCard="checkResult($event)"
@@ -60,9 +60,7 @@ export default {
           this.$refs.card[this.rules[1].index].onDisabledCard()
           this.rules = []
 
-          const disabledElements = document.querySelectorAll(
-            '.play__screen .play__screen--cards .card.disabled'
-          )
+          const disabledElements = document.querySelectorAll('.play__screen--cards .card.disabled')
 
           if (disabledElements && disabledElements.length === this.cardsContext.length - 2)
             this.$emit('onFinish')

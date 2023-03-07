@@ -19,7 +19,9 @@
         }"
       ></div>
     </div>
-    <div class="card__face card__face--back">{{ card.value }}</div>
+    <div class="card__face card__face--back">
+      <div class="card__content" :style="backgroundImageBackStyle"></div>
+    </div>
   </div>
 </template>
 
@@ -46,6 +48,11 @@ export default {
     }
   },
   emits: ['onFlipCard'],
+  computed: {
+    backgroundImageBackStyle() {
+      return `background-image: url('./${this.card.img}')`
+    }
+  },
   methods: {
     onFlipCard() {
       if (this.rules.length >= 2 || this.isFlipped || this.isDisabled) return
@@ -90,7 +97,15 @@ export default {
 }
 
 .card__face--front .card__content {
-  background: url('../assets/images/icon_back.png') no-repeat center center;
+  background: url('./images/icon_back.png') no-repeat center center;
+  height: 100%;
+  width: 100%;
+}
+
+.card__face--back .card__content {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain;
   height: 100%;
   width: 100%;
 }
